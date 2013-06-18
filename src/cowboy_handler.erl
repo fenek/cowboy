@@ -163,7 +163,6 @@ handler_before_loop(Req, State=#state{hibernate=true}, Handler, HandlerState) ->
 		[Req, State#state{hibernate=false}, Handler, HandlerState]};
 handler_before_loop(Req, State, Handler, HandlerState) ->
 	[Socket, Transport] = cowboy_req:get([socket, transport], Req),
-	Transport:setopts(Socket, [{active, once}]),
 	handler_loop(Req, State, Handler, HandlerState).
 
 %% Almost the same code can be found in cowboy_websocket.
